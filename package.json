@@ -29,8 +29,6 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.165",
-    "js-combinatorics": "^1.4.5",
-    "lodash": "^4.17.20",
-    "lodash.combinations": "^18.10.0"
+    "lodash": "^4.17.20"
   }
 }
