@@ -1,42 +1,30 @@
 package dayone
 
-// yikes
-// use combinations :(
-func fixReportPartOne(expenses []int) int {
-	var possibleCombinations [][]int
-	for _, firstExpense := range expenses {
-		var remainingExpenses = expenses[1:]
-		for _, secondExpense := range remainingExpenses {
-			possibleCombinations = append(possibleCombinations, []int{firstExpense, secondExpense})
+import (
+	stat "gonum.org/v1/gonum/stat/combin"
+)
+
+// there's probably some helpers somewhere...
+func fixReport(expenses []int, size int) int {
+	combinations := stat.Combinations(len(expenses), size)
+	var foundExpense []int
+	for _, combination := range combinations {
+		var tuple []int
+		var sumTotal int
+		for index := range combination {
+			tuple = append(tuple, expenses[combination[index]])
+			sumTotal += expenses[combination[index]]
+		}
+		if sumTotal == 2020 {
+			foundExpense = tuple
+			break
 		}
 	}
 
-	var solutionTuple []int
-	for _, combination := range possibleCombinations {
-		if combination[0]+combination[1] == 2020 {
-			solutionTuple = combination
-		}
+	result := foundExpense[0]
+	for _, value := range foundExpense[1:] {
+		result = result * value
 	}
 
-	return solutionTuple[0] * solutionTuple[1]
-}
-
-func fixReportPartTwo(expenses []int) int {
-	var possibleCombinations [][]int
-	for index, firstExpense := range expenses {
-		for secondIndex, secondExpense := range expenses[index:] {
-			for _, thirdExpense := range expenses[secondIndex:] {
-				possibleCombinations = append(possibleCombinations, []int{firstExpense, secondExpense, thirdExpense})
-			}
-		}
-	}
-
-	var solutionTuple []int
-	for _, combination := range possibleCombinations {
-		if combination[0]+combination[1]+combination[2] == 2020 {
-			solutionTuple = combination
-		}
-	}
-
-	return solutionTuple[0] * solutionTuple[1] * solutionTuple[2]
+	return result
 }
