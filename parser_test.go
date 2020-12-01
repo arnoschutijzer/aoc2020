@@ -7,5 +7,5 @@ import (
 )
 
 func TestParser(t *testing.T) {
-	assert.Equal(t, []string{"AAA", "BBB", "CCC"}, ReadFile("./fixtures/parser_test_1.txt"))
+	assert.Equal(t, []int{123, 456, 789}, ReadFile("./fixtures/parser_test_1.txt"))
 }

@@ -2,13 +2,20 @@ package parser
 
 import (
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
-func ReadFile(path string) []string {
+func ReadFile(path string) []int {
 	data, _ := ioutil.ReadFile(path)
 	textinput := string(data)
 	list := strings.Split(textinput, "\n")
 
-	return list
+	var expenses []int
+	for _, expense := range list {
+		parsedExpense, _ := strconv.Atoi(expense)
+		expenses = append(expenses, parsedExpense)
+	}
+
+	return expenses
 }
