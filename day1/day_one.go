@@ -21,8 +21,8 @@ func fixReport(expenses []int, size int) int {
 		}
 	}
 
-	result := foundExpense[0]
-	for _, value := range foundExpense[1:] {
+	result := 1
+	for _, value := range foundExpense {
 		result = result * value
 	}
 
