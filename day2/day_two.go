@@ -2,8 +2,6 @@ package daytwo
 
 import "strings"
 
-type RuleSet string
-
 type Rule interface {
 	isValid(password Password) bool
 }
