@@ -21,8 +21,8 @@ func ReadFile(path string) []Password {
 
 		occurences := strings.Split(characterCount, "-")
 
-		minOccurence, _ := strconv.Atoi((occurences[0]))
-		maxOccurence, _ := strconv.Atoi((occurences[1]))
+		minOccurence, _ := strconv.Atoi(occurences[0])
+		maxOccurence, _ := strconv.Atoi(occurences[1])
 		password.minOccurence = minOccurence
 		password.maxOccurence = maxOccurence
 
