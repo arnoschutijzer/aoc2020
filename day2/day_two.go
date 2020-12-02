@@ -36,7 +36,7 @@ func (password Password) isValidPartTwo() bool {
 	return (doesFirstCharacterMatch || doesSecondCharacterMatch) && (firstCharacter != secondCharacter)
 }
 
-func CalculateValidPasswords(passwords []Password, ruleset RuleSet) int {
+func CountValidPasswords(passwords []Password, ruleset RuleSet) int {
 	validPasswords := 0
 
 	for _, password := range passwords {
