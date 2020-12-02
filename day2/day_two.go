@@ -5,8 +5,8 @@ import "strings"
 type RuleSet string
 
 const (
-	PartOne RuleSet = "partOne"
-	PartTwo RuleSet = "partTwo"
+	SledRule     RuleSet = "SledRule"
+	TobogganRule RuleSet = "TobogganRule"
 )
 
 type Password struct {
@@ -33,11 +33,7 @@ func (password Password) isValidPartTwo() bool {
 	secondCharacter := string(password.password[password.maxOccurence-1])
 	doesSecondCharacterMatch := secondCharacter == password.letter
 
-	if firstCharacter == secondCharacter {
-		return false
-	}
-
-	return doesFirstCharacterMatch || doesSecondCharacterMatch
+	return (doesFirstCharacterMatch || doesSecondCharacterMatch) && (firstCharacter != secondCharacter)
 }
 
 func CalculateValidPasswords(passwords []Password, ruleset RuleSet) int {
@@ -45,13 +41,13 @@ func CalculateValidPasswords(passwords []Password, ruleset RuleSet) int {
 
 	for _, password := range passwords {
 		switch ruleset {
-		case PartOne:
+		case SledRule:
 			if password.isValidPartOne() {
 				validPasswords += 1
 			}
 			break
 
-		case PartTwo:
+		case TobogganRule:
 			if password.isValidPartTwo() {
 				validPasswords += 1
 			}
