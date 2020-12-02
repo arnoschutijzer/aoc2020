@@ -4,25 +4,13 @@ import "strings"
 
 type RuleSet string
 
-const (
-	SledRule     RuleSet = "SledRule"
-	TobogganRule RuleSet = "TobogganRule"
-)
-
-type Password struct {
-	letter       string
-	minOccurence int
-	maxOccurence int
-
-	password string
+type Rule interface {
+	isValid(password Password) bool
 }
 
-func (password Password) isValidPartOne() bool {
-	letterCount := strings.Count(password.password, password.letter)
-	return letterCount >= password.minOccurence && letterCount <= password.maxOccurence
-}
+type TobogganRule struct{}
 
-func (password Password) isValidPartTwo() bool {
+func (rule TobogganRule) isValid(password Password) bool {
 	firstCharacter := string(password.password[password.minOccurence-1])
 	doesFirstCharacterMatch := firstCharacter == password.letter
 
@@ -36,22 +24,27 @@ func (password Password) isValidPartTwo() bool {
 	return (doesFirstCharacterMatch || doesSecondCharacterMatch) && (firstCharacter != secondCharacter)
 }
 
-func CountValidPasswords(passwords []Password, ruleset RuleSet) int {
+type SledRule struct{}
+
+func (rule SledRule) isValid(password Password) bool {
+	letterCount := strings.Count(password.password, password.letter)
+	return letterCount >= password.minOccurence && letterCount <= password.maxOccurence
+}
+
+type Password struct {
+	letter       string
+	minOccurence int
+	maxOccurence int
+
+	password string
+}
+
+func CountValidPasswords(passwords []Password, rule Rule) int {
 	validPasswords := 0
 
 	for _, password := range passwords {
-		switch ruleset {
-		case SledRule:
-			if password.isValidPartOne() {
-				validPasswords += 1
-			}
-			break
-
-		case TobogganRule:
-			if password.isValidPartTwo() {
-				validPasswords += 1
-			}
-			break
+		if rule.isValid(password) {
+			validPasswords += 1
 		}
 	}
 
