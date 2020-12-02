@@ -23,5 +23,5 @@ func TestValidPasswordsFromInputPartTwo(t *testing.T) {
 
 func TestValidPasswordsPartTwo(t *testing.T) {
 	passwords := ReadFile("./fixtures/daytwo_personal.txt")
-	assert.Equal(t, 1, CalculateValidPasswords(passwords, PartTwo))
+	assert.Equal(t, 428, CalculateValidPasswords(passwords, PartTwo))
 }
