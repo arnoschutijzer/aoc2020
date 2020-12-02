@@ -3,7 +3,7 @@
 ```
 
 # download deps
-go mod download
+go get -v -t -d ./...
 
 # run tests
 go test ./...
