@@ -19,8 +19,10 @@ func ReadFile(path string) []Password {
 		re := regexp.MustCompile(`([0-9])*-(0-9)*\w+`)
 		characterCount := re.FindString(passwordEntry)
 
-		minOccurence, _ := strconv.Atoi((string(characterCount[0])))
-		maxOccurence, _ := strconv.Atoi((string(characterCount[2])))
+		occurences := strings.Split(characterCount, "-")
+
+		minOccurence, _ := strconv.Atoi((occurences[0]))
+		maxOccurence, _ := strconv.Atoi((occurences[1]))
 		password.minOccurence = minOccurence
 		password.maxOccurence = maxOccurence
 
