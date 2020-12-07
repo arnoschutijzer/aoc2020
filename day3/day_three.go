@@ -1,7 +1,7 @@
 package daythree
 
 type Trip struct {
-	slope            Slope
+	slope            *Slope
 	topology         [][]string
 	encounteredTrees int
 	currentXPosition int
@@ -13,7 +13,7 @@ type Slope struct {
 	down  int
 }
 
-func NewTrip(topology [][]string, slope Slope) *Trip {
+func NewTrip(topology [][]string, slope *Slope) *Trip {
 	return &Trip{
 		slope:            slope,
 		topology:         topology,
@@ -47,7 +47,7 @@ func (trip *Trip) WalkTheWalkAndCountTheTrees() int {
 	return trip.encounteredTrees
 }
 
-func CountTreesForMultipleSlopes(topology [][]string, slopes []Slope) int {
+func CountTreesForMultipleSlopes(topology [][]string, slopes []*Slope) int {
 	var treesForSlopes []int
 
 	for _, slope := range slopes {
