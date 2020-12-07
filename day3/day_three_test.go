@@ -62,18 +62,7 @@ func TestCountsTreesFromFixturePartTwo(t *testing.T) {
 		},
 	}
 
-	var treesForSlopes []int
 	topology := ParseTopology("./fixtures/topology_personal.txt")
 
-	for _, slope := range slopes {
-		trip := NewTrip(topology, slope)
-		treesForSlopes = append(treesForSlopes, trip.WalkTheWalkAndCountTheTrees())
-	}
-
-	multipliedTrees := 1
-	for _, trees := range treesForSlopes {
-		multipliedTrees = multipliedTrees * trees
-	}
-
-	assert.Equal(t, 6818112000, multipliedTrees)
+	assert.Equal(t, 6818112000, CountTreesForMultipleSlopes(topology, slopes))
 }

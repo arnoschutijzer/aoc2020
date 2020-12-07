@@ -46,3 +46,19 @@ func (trip *Trip) WalkTheWalkAndCountTheTrees() int {
 
 	return trip.encounteredTrees
 }
+
+func CountTreesForMultipleSlopes(topology [][]string, slopes []Slope) int {
+	var treesForSlopes []int
+
+	for _, slope := range slopes {
+		trip := NewTrip(topology, slope)
+		treesForSlopes = append(treesForSlopes, trip.WalkTheWalkAndCountTheTrees())
+	}
+
+	multipliedTrees := 1
+	for _, trees := range treesForSlopes {
+		multipliedTrees = multipliedTrees * trees
+	}
+
+	return multipliedTrees
+}
