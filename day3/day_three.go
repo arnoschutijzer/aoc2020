@@ -1,14 +1,21 @@
 package daythree
 
 type Trip struct {
+	slope            Slope
 	topology         [][]string
 	encounteredTrees int
 	currentXPosition int
 	currentYPosition int
 }
 
-func NewTrip(topology [][]string) *Trip {
+type Slope struct {
+	right int
+	down  int
+}
+
+func NewTrip(topology [][]string, slope Slope) *Trip {
 	return &Trip{
+		slope:            slope,
 		topology:         topology,
 		currentXPosition: 0,
 		currentYPosition: 0,
@@ -17,8 +24,8 @@ func NewTrip(topology [][]string) *Trip {
 }
 
 func (trip *Trip) moveOn() {
-	trip.currentXPosition += 3
-	trip.currentYPosition += 1
+	trip.currentXPosition += trip.slope.right
+	trip.currentYPosition += trip.slope.down
 }
 
 func (trip *Trip) checkCurrentSpotForTrees() {
@@ -30,12 +37,11 @@ func (trip *Trip) checkCurrentSpotForTrees() {
 }
 
 func (trip *Trip) WalkTheWalkAndCountTheTrees() int {
-
 	row := 0
 	for row < len(trip.topology)-1 {
 		trip.moveOn()
 		trip.checkCurrentSpotForTrees()
-		row++
+		row += trip.slope.down
 	}
 
 	return trip.encounteredTrees
