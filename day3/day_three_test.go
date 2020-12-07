@@ -27,11 +27,11 @@ func TestTripCorrectlyMovesOn(t *testing.T) {
 }
 
 func TestCounts2TreesFromFixture(t *testing.T) {
-	topology := ParseTopology("./fixtures/topology_input.txt")
-	assert.Equal(t, 2, CountEncounteredTrees(topology))
+	trip := NewTrip(ParseTopology("./fixtures/topology_input.txt"))
+	assert.Equal(t, 2, trip.WalkTheWalkAndCountTheTrees())
 }
 
 func TestCountsTreesFromFixture(t *testing.T) {
-	topology := ParseTopology("./fixtures/topology_personal.txt")
-	assert.Equal(t, 228, CountEncounteredTrees(topology))
+	trip := NewTrip(ParseTopology("./fixtures/topology_personal.txt"))
+	assert.Equal(t, 228, trip.WalkTheWalkAndCountTheTrees())
 }

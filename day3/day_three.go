@@ -29,8 +29,7 @@ func (trip *Trip) checkCurrentSpotForTrees() {
 	}
 }
 
-func CountEncounteredTrees(topology [][]string) int {
-	trip := NewTrip(topology)
+func (trip *Trip) WalkTheWalkAndCountTheTrees() int {
 
 	row := 0
 	for row < len(trip.topology)-1 {
