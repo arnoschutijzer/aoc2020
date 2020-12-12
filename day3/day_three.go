@@ -36,7 +36,7 @@ func (trip *Trip) checkCurrentSpotForTrees() {
 	}
 }
 
-func (trip *Trip) WalkTheWalkAndCountTheTrees() int {
+func (trip *Trip) walkTheWalkAndCountTheTrees() int {
 	row := 0
 	for row < len(trip.topology)-1 {
 		trip.moveOn()
@@ -52,7 +52,7 @@ func CountTreesForMultipleSlopes(topology [][]string, slopes []*Slope) int {
 
 	for _, slope := range slopes {
 		trip := NewTrip(topology, slope)
-		treesForSlopes = append(treesForSlopes, trip.WalkTheWalkAndCountTheTrees())
+		treesForSlopes = append(treesForSlopes, trip.walkTheWalkAndCountTheTrees())
 	}
 
 	multipliedTrees := 1

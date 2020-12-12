@@ -33,12 +33,12 @@ func TestTripCorrectlyMovesOn(t *testing.T) {
 
 func TestCounts2TreesFromFixture(t *testing.T) {
 	trip := NewTrip(ParseTopology("./fixtures/topology_input.txt"), &defaultSlope)
-	assert.Equal(t, 2, trip.WalkTheWalkAndCountTheTrees())
+	assert.Equal(t, 2, trip.walkTheWalkAndCountTheTrees())
 }
 
 func TestCountsTreesFromFixture(t *testing.T) {
 	trip := NewTrip(ParseTopology("./fixtures/topology_personal.txt"), &defaultSlope)
-	assert.Equal(t, 228, trip.WalkTheWalkAndCountTheTrees())
+	assert.Equal(t, 228, trip.walkTheWalkAndCountTheTrees())
 }
 
 func TestCountsTreesFromFixturePartTwo(t *testing.T) {
