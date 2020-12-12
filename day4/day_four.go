@@ -5,7 +5,8 @@ import (
 )
 
 type Passport struct {
-	fields string
+	stringified string
+	fields      map[string]string
 
 	pid string
 }
@@ -22,7 +23,7 @@ var validFields = []string{
 
 func (passport *Passport) checkValidity() bool {
 	for _, field := range validFields {
-		if !strings.Contains(passport.fields, field) {
+		if !strings.Contains(passport.stringified, field) {
 			return false
 		}
 	}

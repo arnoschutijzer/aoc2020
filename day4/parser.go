@@ -15,22 +15,25 @@ func ParsePassports(path string) []Passport {
 	var passports []Passport
 	for _, passportString := range passportStrings {
 		passports = append(passports, Passport{
-			fields: passportString,
-			pid:    GetIDFromPassword(passportString),
+			stringified: passportString,
+			fields:      GetFieldsFrom(passportString),
 		})
 	}
 
 	return passports
 }
 
-func GetIDFromPassword(stringifiedPassport string) string {
-	re := regexp.MustCompile(`(?m)pid:(?P<value>[0-9]{9})($| )`)
-	matches := re.FindStringSubmatch(stringifiedPassport)
+func GetFieldsFrom(stringifiedPassport string) map[string]string {
+	fields := make(map[string]string)
+	// this can be improved to include all characters excluding whitespace...
+	re := regexp.MustCompile(`(?m)(?P<name>\w+):(?P<value>#?\w+)($| )`)
+	matches := re.FindAllStringSubmatch(stringifiedPassport, -1)
 
-	indexOfSub := re.SubexpIndex("value")
-	if indexOfSub >= len(matches) {
-		return ""
+	for _, match := range matches {
+		key := match[re.SubexpIndex("name")]
+		value := match[re.SubexpIndex("value")]
+		fields[key] = value
 	}
 
-	return matches[re.SubexpIndex("value")]
+	return fields
 }
