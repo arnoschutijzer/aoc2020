@@ -1,9 +1,13 @@
 package dayfour
 
-import "strings"
+import (
+	"strings"
+)
 
 type Passport struct {
 	fields string
+
+	pid string
 }
 
 var validFields = []string{
