@@ -21,5 +21,5 @@ func TestValidatesMultiplePassports(t *testing.T) {
 func TestValidatesPartOneInput(t *testing.T) {
 	passports := ParsePassports("./fixtures/part_one_input.txt")
 	validPassports := OnlyValidPassports(passports)
-	assert.Equal(t, 2, len(validPassports))
+	assert.Equal(t, 254, len(validPassports))
 }
