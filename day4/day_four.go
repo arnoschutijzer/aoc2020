@@ -7,11 +7,7 @@ import (
 	"strings"
 )
 
-type Passport struct {
-	stringified string
-}
-
-func (passport *Passport) containsAllFields() bool {
+func ContainsAllFields(passport string) bool {
 	var validFields = []string{
 		"byr",
 		"iyr",
@@ -23,7 +19,7 @@ func (passport *Passport) containsAllFields() bool {
 	}
 
 	for _, field := range validFields {
-		if !strings.Contains(passport.stringified, field) {
+		if !strings.Contains(passport, field) {
 			return false
 		}
 	}
@@ -31,15 +27,15 @@ func (passport *Passport) containsAllFields() bool {
 	return true
 }
 
-func (passport *Passport) compliesWithRules() bool {
+func CompliesWithRules(passport string) bool {
 	rules := []bool{
-		hasValidID(passport.stringified),
-		hasValidBirthYear(passport.stringified),
-		hasValidExpirationYear(passport.stringified),
-		hasValidIssueYear(passport.stringified),
-		hasValidEyeColor(passport.stringified),
-		hasValidHeight(passport.stringified),
-		hasValidHairColor(passport.stringified),
+		hasValidID(passport),
+		hasValidBirthYear(passport),
+		hasValidExpirationYear(passport),
+		hasValidIssueYear(passport),
+		hasValidEyeColor(passport),
+		hasValidHeight(passport),
+		hasValidHairColor(passport),
 	}
 
 	for _, rule := range rules {
@@ -121,20 +117,20 @@ func hasValidHeight(stringifiedPassport string) bool {
 	return height >= 59 && height <= 76
 }
 
-func OnlyPassportsThatContainAllFields(passports []Passport) []Passport {
-	var validPassports []Passport
+func OnlyPassportsThatContainAllFields(passports []string) []string {
+	var validPassports []string
 	for _, passport := range passports {
-		if passport.containsAllFields() {
+		if ContainsAllFields(passport) {
 			validPassports = append(validPassports, passport)
 		}
 	}
 	return validPassports
 }
 
-func OnlyPassportsThatComplyWithRules(passports []Passport) []Passport {
-	var validPassports []Passport
+func OnlyPassportsThatComplyWithRules(passports []string) []string {
+	var validPassports []string
 	for _, passport := range passports {
-		if passport.compliesWithRules() {
+		if CompliesWithRules(passport) {
 			validPassports = append(validPassports, passport)
 		}
 	}
