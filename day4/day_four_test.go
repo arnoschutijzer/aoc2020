@@ -37,6 +37,7 @@ func TestHasValidExpirationYear(t *testing.T) {
 	assert.True(t, hasValidExpirationYear("eyr:2030 pid:1234"))
 	assert.False(t, hasValidExpirationYear("\neyr:20"))
 	assert.False(t, hasValidExpirationYear("eyr:2019"))
+	assert.False(t, hasValidExpirationYear("eyr:something"))
 	assert.False(t, hasValidExpirationYear("eyr:2031"))
 }
 
@@ -57,6 +58,7 @@ func TestHasValidHeight(t *testing.T) {
 	assert.False(t, hasValidHeight("hgt:194cm"))
 	assert.False(t, hasValidHeight("hgt:58in"))
 	assert.False(t, hasValidHeight("hgt:77in"))
+	assert.False(t, hasValidHeight("hgt:win"))
 }
 
 func TestHasValidEyeColor(t *testing.T) {
