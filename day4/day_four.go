@@ -98,23 +98,15 @@ func hasValidBirthYear(stringifiedPassport string) bool {
 	return isSubmatchBetween(stringifiedPassport, keyword, expression, 2002, 1920)
 }
 
-func hasValidHeight(stringifiedPassport string) bool {
-	re := regexp.MustCompile(`(?m)hgt:(?P<value>[0-9]+)(?P<unit>(cm|in))($| )`)
-	match := re.FindStringSubmatch(stringifiedPassport)
+func hasValidHeight(aString string) bool {
+	valueKeyword := "value"
+	cmExpression := fmt.Sprintf("(?m)hgt:(?P<%s>[0-9]+)(cm)($| )", valueKeyword)
+	inExpression := fmt.Sprintf("(?m)hgt:(?P<%s>[0-9]+)(in)($| )", valueKeyword)
 
-	if len(match) == 0 {
-		return false
-	}
+	isValidHeightInCentimeters := isSubmatchBetween(aString, valueKeyword, cmExpression, 193, 150)
+	isValidHeightInInches := isSubmatchBetween(aString, valueKeyword, inExpression, 76, 59)
 
-	value := match[re.SubexpIndex("value")]
-	unit := match[re.SubexpIndex("unit")]
-	height, _ := strconv.Atoi(value)
-
-	if unit == "cm" {
-		return height >= 150 && height <= 193
-	}
-
-	return height >= 59 && height <= 76
+	return isValidHeightInCentimeters || isValidHeightInInches
 }
 
 func OnlyPassportsThatContainAllFields(passports []string) []string {
