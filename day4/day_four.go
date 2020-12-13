@@ -79,11 +79,7 @@ func isSubmatchBetween(aString string, keyword string, expression string, max in
 	}
 
 	value := match[re.SubexpIndex(keyword)]
-	parsedValue, error := strconv.Atoi(value)
-
-	if error != nil {
-		return false
-	}
+	parsedValue, _ := strconv.Atoi(value)
 
 	return parsedValue <= max && parsedValue >= min
 }
@@ -116,11 +112,7 @@ func hasValidHeight(stringifiedPassport string) bool {
 
 	value := match[re.SubexpIndex("value")]
 	unit := match[re.SubexpIndex("unit")]
-	height, error := strconv.Atoi(value)
-
-	if error != nil {
-		return false
-	}
+	height, _ := strconv.Atoi(value)
 
 	if unit == "cm" {
 		return height >= 150 && height <= 193

@@ -58,7 +58,7 @@ func TestHasValidHeight(t *testing.T) {
 	assert.False(t, hasValidHeight("hgt:194cm"))
 	assert.False(t, hasValidHeight("hgt:58in"))
 	assert.False(t, hasValidHeight("hgt:77in"))
-	assert.False(t, hasValidHeight("hgt:win"))
+	assert.False(t, hasValidHeight("hgt:0w0in"))
 }
 
 func TestHasValidEyeColor(t *testing.T) {
